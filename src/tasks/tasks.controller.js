@@ -14,4 +14,17 @@ const getTask = (db) => async (req, res, next) => {
   }
 }
 
-module.exports = { getTask }
+const createTask = (db) => async (req, res, next) => {
+  try {
+    if (!req.body.name) {
+      throw new Error('Body does not contain valid "name" property')
+    }
+
+    const newTask = await db.query('INSERT INTO tasks(name) VALUES($1)', [req.body.name])
+    return res.status(201).json({ status: 'ok', result: newTask })
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { getTask, createTask }
