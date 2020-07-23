@@ -12,6 +12,7 @@ function server(db) {
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
 
+  app.get('/', (req, res) => res.status(200).send('<p>Endpoints:</p><p>POST /tasks,</p><p>GET /tasks/:id</p>'))
   app.use('/tasks', taskRouter(db))
 
   app.use((err, req, res, next) => {
