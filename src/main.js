@@ -1,7 +1,6 @@
 require('dotenv').config()
 const { Client } = require('pg')
 const serverBuilder = require('./server')
-const server = require('./server')
 
 async function bootstrap() {
   const port = parseInt(process.env.NODE_ENV || '8080')
